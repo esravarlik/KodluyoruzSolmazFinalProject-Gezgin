@@ -1,0 +1,925 @@
+{
+  "info": {
+    "_postman_id": "b51dc9f7-e71e-440c-94f6-2f737d18497c",
+    "name": "gezgin",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "21650362"
+  },
+  "item": [
+    {
+      "name": "http://localhost:8080/vehicles",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"vehicleType\": \"BUS\",\r\n    \"capacity\": 45\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/vehicles",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/vehicles/17",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicles/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicles",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/vehicles/AIRPLANE",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicles/vehicleTypes/BUS",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicles",
+            "vehicleTypes",
+            "BUS"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/vehicles",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"vehicleType\": \"AIRPLANE\",\r\n    \"capacity\": 189\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/vehicles",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/vehicles/1",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"vehicleType\": \"AIRPLANE\",\r\n    \"capacity\": 189\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/vehicles/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicles",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/vehicles/13",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicles/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicles",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/locations",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/locations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "locations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/locations/19",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/locations/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "locations",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/locations/20",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/locations/city/Istanbul",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "locations",
+            "city",
+            "Istanbul"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/locations",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"city\": \"ISTANBUL\",\r\n    \"address\":\"ISTANBUL hava limanı\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/locations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "locations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/locations/25",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"city\": \"TOKYO\",\r\n    \"address\":\"Haneda Uluslararası Havalimanı \"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/locations/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "locations",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/locations/26",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/locations/8",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "locations",
+            "8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"sumus@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"userType\":\"INDIVIDUAL\",\r\n    \"phoneNumber\":\"55555555555\",\r\n    \"role\":\"USER\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"esra@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/users/email/ummuhan@gmail.com",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/users/email/esra@gmail.com",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "email",
+            "esra@gmail.com"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/users/17",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/users/9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "9"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/users/28",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "10"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/passenger",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/passenger",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "passenger"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/passenger/8",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/passenger/8",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "passenger",
+            "8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/passenger",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n       \"firstName\":\"Esra\",\r\n       \"lastName\":\"Varlık\",\r\n       \"gender\":\"FEMALE\",\r\n       \"identificationId\":\"15986549826\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/passenger",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "passenger"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/passenger/61",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n       \"firstName\":\"Alperen\",\r\n       \"lastName\":\"Alp\",\r\n       \"identificationId\":\"99999999999\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/passenger/11",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "passenger",
+            "11"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/passenger",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n       \"firstName\":\"Alperen\",\r\n       \"lastName\":\"Alp\",\r\n       \"gender\":\"MALE\",\r\n       \"identificationId\":\"33333333333\",\r\n       \"user\":{\r\n        \"createdDate\": \"2023-01-29T17:20:12.198908\",\r\n        \"updatedDate\": \"2023-01-29T17:20:12.198908\",\r\n          \"id\": 47,\r\n         \"email\": \"alp@gmail.com\",\r\n         \"password\": \"$2a$10$2esRze5YqSjDte7mnFfggOBxxaqjtZsfKU1aIpLNWYBGgCFYPSJcq\",\r\n         \"userType\": \"INDIVIDUAL\",\r\n        \"phoneNumber\": \"22222222222\",\r\n        \"role\": \"USER\"\r\n}\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/passenger/58",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "passenger",
+            "58"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/expeditions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/expeditions",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "expeditions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/expeditions/14",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/expeditions/25",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "expeditions",
+            "25"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/expeditions/from/ISTANBUL/to/TOKYO",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/expeditions/from/TOKYO/to/ISTANBUL",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "expeditions",
+            "from",
+            "TOKYO",
+            "to",
+            "ISTANBUL"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/expeditions/vehicleTypes/AIRPLANE",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/expeditions/vehicleTypes/AIRPLANE",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "expeditions",
+            "vehicleTypes",
+            "AIRPLANE"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/expeditions/17/total-sales",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/expeditions/17/total-sales",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "expeditions",
+            "17",
+            "total-sales"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/expeditions",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"company\": \"KamilKoc\",\r\n    \"departureDate\": \"2023-01-30T18:30:00\",\r\n    \"from\":    {\r\n        \"id\": 3,\r\n        \"city\": \"TOKYO\",\r\n        \"address\": \"Tokyo UluslarArası HavaLimanı\"\r\n    } ,\r\n\r\n    \"to\":      {\r\n        \"id\": 4,\r\n        \"city\": \"ISTANBUL\",\r\n        \"address\": \"Sabiha Gökçen HavaLimanı\"\r\n    },\r\n\r\n\r\n    \"vehicle\":      {\r\n        \"id\": 2,\r\n        \"vehicleType\": \"AIRPLANE\",\r\n        \"capacity\": 189\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/expeditions",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "expeditions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/expeditions/",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/expeditions/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "expeditions",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/expeditions/",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/expeditions/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "expeditions",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/tickets",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/tickets",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tickets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/tickets/26",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/tickets/26",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tickets",
+            "26"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/tickets/user-tickets/9",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/tickets/user-tickets/9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tickets",
+            "user-tickets",
+            "9"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/tickets",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "\r\n{\r\n    \"passengerInformation\":    {\r\n        \"firstName\": \"Esra\",\r\n        \"lastName\": \"Varlık\",\r\n        \"gender\": \"FEMALE\",\r\n        \"identificationId\": \"15986549826\"\r\n    },\r\n\r\n\"expedition\":      {\r\n        \"id\": 25,\r\n        \"company\": \"KamilKoc\",\r\n        \"departureDate\": \"2023-01-30T18:30:00\",\r\n        \"from\": {\r\n            \"id\": 3,\r\n            \"city\": \"TOKYO\",\r\n            \"address\": \"Tokyo UluslarArası HavaLimanı\"\r\n        },\r\n        \"to\": {\r\n            \"id\": 4,\r\n            \"city\": \"ISTANBUL\",\r\n            \"address\": \"Sabiha Gökçen HavaLimanı\"\r\n        },\r\n        \"vehicle\": {\r\n            \"id\": 2,\r\n            \"vehicleType\": \"AIRPLANE\",\r\n            \"capacity\": 189\r\n        },\r\n        \"numberOfTicketsRemaining\": 189\r\n    }\r\n,\r\n    \"user\":     {\r\n        \"id\": 9,\r\n        \"email\": \"esra@gmail.com\",\r\n        \"role\": \"ADMIN\",\r\n        \"userType\": \"INDIVIDUAL\",\r\n        \"phoneNumber\": \"22222222222\"\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/tickets",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tickets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/confirmations",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/confirmations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "confirmations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/confirmations/30",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/confirmations/30",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "confirmations",
+            "30"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/confirmations",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"ticketList\":[\r\n        {\r\n        \r\n    \"id\": 28,\r\n    \"price\": 100.0,\r\n    \"passengerInformation\": {\r\n        \"createdDate\": \"2023-01-31T03:54:56.0265484\",\r\n        \"updatedDate\": \"2023-01-31T03:54:56.0265484\",\r\n        \"id\": 29,\r\n        \"firstName\": \"Esra\",\r\n        \"lastName\": \"Varlık\",\r\n        \"gender\": \"FEMALE\",\r\n        \"identificationId\": \"15986549826\"\r\n    },\r\n    \"expedition\": {\r\n        \"createdDate\": null,\r\n        \"updatedDate\": null,\r\n        \"id\": 25,\r\n        \"company\": \"KamilKoc\",\r\n        \"departureDate\": \"2023-01-30T18:30:00\",\r\n        \"from\": {\r\n            \"id\": 3,\r\n            \"city\": \"TOKYO\",\r\n            \"address\": \"Tokyo UluslarArası HavaLimanı\"\r\n        },\r\n        \"to\": {\r\n            \"id\": 4,\r\n            \"city\": \"ISTANBUL\",\r\n            \"address\": \"Sabiha Gökçen HavaLimanı\"\r\n        },\r\n        \"vehicle\": {\r\n            \"id\": 2,\r\n            \"vehicleType\": \"AIRPLANE\",\r\n            \"capacity\": 189\r\n        },\r\n        \"numberOfTicketsRemaining\": 189\r\n    },\r\n    \"user\": {\r\n        \"createdDate\": null,\r\n        \"updatedDate\": null,\r\n        \"id\": 9,\r\n        \"email\": \"esra@gmail.com\",\r\n        \"password\": null,\r\n        \"userType\": \"INDIVIDUAL\",\r\n        \"phoneNumber\": \"22222222222\",\r\n        \"role\": \"ADMIN\",\r\n        \"notificationType\": null,\r\n        \"detail\": null\r\n    },\r\n    \"isEnable\": false\r\n}\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/confirmations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "confirmations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:8080/confirmations/30",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/confirmations/30",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "confirmations",
+            "30"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
