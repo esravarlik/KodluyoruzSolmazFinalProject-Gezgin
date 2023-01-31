@@ -1,13 +1,12 @@
 # Gezgin
 Kodluyoruz &amp; Solmaz Gümrük Müşavirliği kapsamında yapılan Bootcamp bitirme projesi. Online uçak ve otobüs bileti satışı yapan Java BackEnd Projesidir.
 
+---
+![](gezgin-diagram.png)  
 
 **Proje Konusu**  
 Online uçak ve otobüs bileti satışı yapılmak istenmektedir. Uygulamanın gereksinimleri
-aşağıdaki gibidir.  
-
----
-![](gezgin-diagram.png)  
+aşağıdaki gibidir.
 
 **Gereksinimler**  
 • Kullanıcılar sisteme kayıt ve login olabilmelidir.  
@@ -35,7 +34,7 @@ Uçak yolcu kapasitesi: 189
 Otobüs yolcu kapasitesi: 45  
 Ödeme şekli sadece Kredi kartı ve Havale / EFT olabilir.  
 Ödeme Servisi işlemleri Senkron olmalıdır.
----
+
 **Kullanılan Teknolojiler**
 - Java 11
 - Spring Boot
@@ -103,7 +102,7 @@ Token: ``eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
 eyJzdWIiOiJhbHBpQG1haWwuY29tIiwiaXNzIjoiam9qb2VzcmEiLCJleHAiOjE2NzUxODMwODF9.
 ffb_gbj5TG6ETfzFmFTmLxN-r7moTuN3MTvIo9pVBOY"``  
 Request:
-```
+``` json
 {
     "vehicleType": "AIRPLANE",
     "capacity": 189
@@ -121,8 +120,8 @@ Response: 200 OK
 }
 ```
 **USER Request:**
-```
-{
+``` json
+{ 
     "email": "varlikesraa@email.com",
     "password":"password",
     "userType":"INDIVIDUAL",
