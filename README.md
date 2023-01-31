@@ -1,10 +1,14 @@
 # Gezgin
 Kodluyoruz &amp; Solmaz Gümrük Müşavirliği kapsamında yapılan Bootcamp bitirme projesi. Online uçak ve otobüs bileti satışı yapan Java BackEnd Projesidir.
 
----
+
 **Proje Konusu**  
 Online uçak ve otobüs bileti satışı yapılmak istenmektedir. Uygulamanın gereksinimleri
 aşağıdaki gibidir.  
+
+---
+![](gezgin-diagram.png)  
+
 **Gereksinimler**  
 • Kullanıcılar sisteme kayıt ve login olabilmelidir.  
 • Kullanıcı kayıt işleminden sonra mail gönderilmelidir.  
@@ -22,7 +26,8 @@ kullanıcının telefona numarasına sms gönderilmeli.
 işlemi yapılması yeterlidir. Fakat bu işlemler tek bir Servis(uygulama) üzerinden ve
 polimorfik davranış ile yapılmalıdır.  
 • Kullancılar aldığı biletleri görebilmelidir.
----
+
+
 **Sistem Kabulleri**  
 Kullanıcılar bireysel ve kurumsal olabilir.  
 SMS, Mail ve Push Notification gönderim işlemleri Asenkron olmalıdır.  
@@ -37,8 +42,7 @@ Otobüs yolcu kapasitesi: 45
 - PostgreSQL
 - RabbitMQ
 - Redis
----
-![](gezgin-diagram.png)
+
 ---
 **Entity Relationship Diagram (ERD)**
 ![](gezginERD.png)
