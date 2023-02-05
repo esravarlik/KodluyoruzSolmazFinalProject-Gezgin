@@ -18,7 +18,7 @@ public class ExpeditionConverter {
                 .from(expedition.getFrom())
                 .to(expedition.getTo())
                 .departureDate(expedition.getDepartureDate())
-                .numberOfTicketsRemaining(expedition.getVehicle().getCapacity())
+                .numberOfTicketsRemaining(expedition.getNumberOfTicketsRemaining())
                 .vehicle(expedition.getVehicle())
                 .build();
     }

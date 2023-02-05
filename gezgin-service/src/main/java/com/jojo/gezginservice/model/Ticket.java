@@ -40,6 +40,10 @@ public class Ticket {
     @Column(name = "is_Enable")
     private Boolean isEnable;
 
+    @ManyToOne
+    @JoinColumn(name = "confirmation_id")
+    private Confirmation confirmation;
+
     public Integer getId() {
         return id;
     }
@@ -88,5 +92,12 @@ public class Ticket {
         this.user = user;
     }
 
+    public Confirmation getConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(Confirmation confirmation) {
+        this.confirmation = confirmation;
+    }
 }
 

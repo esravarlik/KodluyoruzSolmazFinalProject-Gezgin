@@ -14,14 +14,16 @@ import com.jojo.gezginservice.model.enums.ErrorCode;
 import com.jojo.gezginservice.model.enums.Gender;
 import com.jojo.gezginservice.model.enums.UserType;
 import com.jojo.gezginservice.repository.ConfirmationRepository;
-import com.jojo.gezginservice.request.TicketRequest;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -54,7 +56,7 @@ public class ConfirmationService {
         return confirmationList;
     }
 
-    public Confirmation getOrderById(Integer id) {
+    public Confirmation getConfirmationById(Integer id) {
         Confirmation confirmation = confirmationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Count not found"));
         return confirmation;
@@ -64,24 +66,31 @@ public class ConfirmationService {
     public Confirmation buy(Confirmation confirmation) throws Exception {
         userCheck(confirmation);
 
-        List<Ticket> buyTickets = ticketService
-                .findByUserIdAndExpeditionId(confirmation.getTicketList().get(0).getUser().getId(),
-                        confirmation.getTicketList().get(0).getExpedition().getId());
-
         getMaxNumberOfMen(confirmation);
         getIndividualUsersMaxTicket(confirmation);
         getCorporateUsersMaxTicket(confirmation);
 
-        for (Ticket ticket : buyTickets) {
+        for (Ticket ticket : new ArrayList<>(confirmation.getTicketList())) {
             ticketService.setEnableUpdate(ticket.getId());
+            adequateTicketControl(ticket.getExpedition().getNumberOfTicketsRemaining());
+            ticket.getExpedition().setNumberOfTicketsRemaining(ticket.getExpedition().getNumberOfTicketsRemaining() - 1);
         }
 
+
         Payment payment = new Payment(confirmation.getTicketList().get(0).getUser().getId(),
-                confirmation.getId(), PaymentType.CREDIT_CARD, "12312312313");
+                confirmation.getTicketList().get(0).getId(), PaymentType.CREDIT_CARD, "12312312313");
         Payment response = paymentServiceClient.create(payment);
 
+        if (response == null) {
+            throw new GeneralException(Message.FAILED_PAYMENT,
+                    HttpStatus.NOT_FOUND,
+                    ErrorCode.NOT_FOUND);
+        }
+
         confirmation.getTicketList().get(0).getUser().setNotificationType(NotificationType.EMAIL);
+        confirmation.getTicketList().get(0).getUser().setDetail("Ticket information sent. ");
         confirmationRepository.save(confirmation);
+
 
         rabbitTemplate.convertAndSend(rabbitMQConfiguration.getQueueName(), confirmation.getTicketList().get(0).getUser());
         logger.log(Level.INFO,
@@ -91,10 +100,23 @@ public class ConfirmationService {
         return confirmation;
     }
 
+    private void adequateTicketControl(Integer ticketNumber) {
+        if (ticketNumber < 1) {
+            throw new GeneralException(Message.NOT_ENOUGH_TICKET,
+                    HttpStatus.NOT_FOUND,
+                    ErrorCode.NOT_FOUND);
+        }
+    }
+
+    private User findUser(Confirmation confirmation) {
+        User user = confirmation.getTicketList().get(0).getUser();
+        return user;
+    }
+
     private void userCheck(Confirmation confirmation) throws Exception {
         Integer numberOfTicketsByTheUser = Math.toIntExact(confirmation.getTicketList().stream().count());
         if (numberOfTicketsByTheUser > 1) {
-            User firstUser = confirmation.getTicketList().get(0).getUser();
+            User firstUser = findUser(confirmation);
             boolean anyDifferent = confirmation.getTicketList().stream()
                     .anyMatch(ticket -> !ticket.getUser().equals(firstUser));
             if (anyDifferent) {
@@ -114,7 +136,7 @@ public class ConfirmationService {
     }
 
     private void getMaxNumberOfMen(Confirmation confirmation) throws Exception {
-        User firstUser = confirmation.getTicketList().get(0).getUser();
+        User firstUser = findUser(confirmation);
         Integer ticketMaleCount = maleCount(confirmation);
         if (UserType.CORPORATE.equals(firstUser.getUserType())) {
             if (ticketMaleCount > MAX_NUMBER_OF_MEN) {
@@ -125,18 +147,30 @@ public class ConfirmationService {
         }
     }
 
-    private Integer filteredCount(User user, TicketRequest ticketRequest) {
-        List<Ticket> filtered =
-                ticketService.findByUserIdAndExpeditionId(user.getId(),
-                        ticketRequest.getExpedition().getId());
-        return Math.toIntExact(filtered.stream().count());
+    public List<Ticket> getMaxTicketByExpeditionId(Confirmation confirmation) {
+        Map<Integer, Long> expeditionIdTicketCount = confirmation.getTicketList().stream()
+                .collect(Collectors.groupingBy(ticket -> ticket.getExpedition().getId(), Collectors.counting()));
+
+        Integer maxExpeditionId = expeditionIdTicketCount.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+
+        if (maxExpeditionId == null) {
+            return Collections.emptyList();
+        }
+
+        return confirmation.getTicketList().stream()
+                .filter(ticket -> ticket.getExpedition().getId().equals(maxExpeditionId))
+                .collect(Collectors.toList());
     }
 
     private void getIndividualUsersMaxTicket(Confirmation confirmation) throws Exception {
-        User firstUser = confirmation.getTicketList().get(0).getUser();
-        Integer ticketCount = Math.toIntExact(confirmation.getTicketList().stream().count());
+        User firstUser = findUser(confirmation);
+        Integer sameExpeditionTicketCount = Math.toIntExact(getMaxTicketByExpeditionId(confirmation).stream().count());
+
         if (UserType.INDIVIDUAL.equals(firstUser.getUserType())) {
-            if (ticketCount > INDIVIDUAL_USERS_MAX_TICKET) {
+            if (sameExpeditionTicketCount > INDIVIDUAL_USERS_MAX_TICKET) {
                 logger.log(Level.WARNING,
                         "[ConfirmationService] -- " +
                                 "You have exceeded the maximum amount of tickets that can be purchased. ");
@@ -148,14 +182,15 @@ public class ConfirmationService {
     }
 
     private void getCorporateUsersMaxTicket(Confirmation confirmation) throws Exception {
-        User firstUser = confirmation.getTicketList().get(0).getUser();
-        Integer ticketCount = Math.toIntExact(confirmation.getTicketList().stream().count());
+        User firstUser = findUser(confirmation);
+        Integer sameExpeditionTicketCount = Math.toIntExact(getMaxTicketByExpeditionId(confirmation).stream().count());
+
 
         if (UserType.CORPORATE.equals(firstUser.getUserType())) {
             logger.log(Level.WARNING,
                     "[ConfirmationService] -- " +
                             "You have exceeded the maximum amount of tickets that can be purchased. ");
-            if (ticketCount > CORPORATE_USERS_MAX_TICKET) {
+            if (sameExpeditionTicketCount > CORPORATE_USERS_MAX_TICKET) {
                 throw new GeneralException(Message.MAX_TICKET,
                         HttpStatus.NOT_FOUND,
                         ErrorCode.NOT_FOUND);

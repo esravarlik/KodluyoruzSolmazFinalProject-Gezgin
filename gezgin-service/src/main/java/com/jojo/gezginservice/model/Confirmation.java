@@ -23,7 +23,7 @@ public class Confirmation extends BaseEntity {
     @Column(name = "id")
     private Integer id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "confirmation")
     private List<Ticket> ticketList;
 
     public Integer getId() {

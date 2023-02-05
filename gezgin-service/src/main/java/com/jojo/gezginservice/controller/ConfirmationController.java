@@ -27,8 +27,8 @@ public class ConfirmationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Confirmation> getOrder(@PathVariable Integer id) throws Exception {
-        Confirmation confirmation = confirmationService.getOrderById(id);
+    public ResponseEntity<Confirmation> getConfirmation(@PathVariable Integer id) throws Exception {
+        Confirmation confirmation = confirmationService.getConfirmationById(id);
         return ResponseEntity.ok(confirmation);
     }
 

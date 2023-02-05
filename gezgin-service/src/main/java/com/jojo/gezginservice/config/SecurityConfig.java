@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests(auth -> {
+
                     auth.antMatchers("/vehicles/**", "/tickets/{id}/total-price",
                             "/locations/**", "/expeditions/{id}/total-sales",
                             "/expeditions/post", "/expeditions/{id}").hasAuthority("ADMIN");
@@ -66,7 +67,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/login", "/register");
+        return (web) -> web.ignoring().antMatchers( "/login", "/register");
     }
 
     @Bean

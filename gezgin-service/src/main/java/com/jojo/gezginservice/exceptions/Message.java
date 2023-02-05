@@ -39,4 +39,6 @@ public class Message {
     public static String NOT_SAME_USER = "Users in confirmation object are not the same. ";
 
     public static String MAX_TICKET = "You have exceeded the maximum amount of tickets that can be purchased. ";
+
+    public static String FAILED_PAYMENT = "Payment could not be completed. ";
 }

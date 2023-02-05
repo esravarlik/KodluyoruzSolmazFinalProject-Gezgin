@@ -9,7 +9,6 @@ import com.jojo.gezginservice.repository.ExpeditionRepository;
 import com.jojo.gezginservice.request.ExpeditionRequest;
 import com.jojo.gezginservice.response.ExpeditionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +31,7 @@ public class ExpeditionService {
 
     public ExpeditionResponse create(ExpeditionRequest expeditionRequest) {
         Expedition savedExpedition = converter.convert(expeditionRequest);
+        savedExpedition.setNumberOfTicketsRemaining(savedExpedition.getVehicle().getCapacity());
         expeditionRepository.save(savedExpedition);
         return converter.convert(savedExpedition);
     }
@@ -43,7 +43,7 @@ public class ExpeditionService {
     }
 
 
-    @Cacheable(value = "totalTicketSales", key = "#id")
+    //@Cacheable(value = "totalTicketSales", key = "#id")
     public Integer getTotalTicketSales(Integer id) throws Exception {
         Integer totalTicketSales = (getByExpeditionId(id).getVehicle().getCapacity())
                 - (getByExpeditionId(id).getNumberOfTicketsRemaining());

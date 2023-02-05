@@ -9,7 +9,6 @@ import com.jojo.gezginservice.repository.TicketRepository;
 import com.jojo.gezginservice.request.TicketRequest;
 import com.jojo.gezginservice.response.TicketResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +34,6 @@ public class TicketService {
         Ticket ticket = converter.convert(ticketRequest);
         ticket.setEnable(false);
         ticket.setPrice(TICKET_PRICE);
-        adequateTicketControl(ticket.getExpedition().getNumberOfTicketsRemaining());
-        ticket.getExpedition().setNumberOfTicketsRemaining(ticket.getExpedition().getNumberOfTicketsRemaining() - 1);
-
         return converter.convert(ticketRepository.save(ticket));
     }
 
@@ -48,7 +44,9 @@ public class TicketService {
 
     public List<Ticket> getTicketsByUserId(Integer userId) {
         List<Ticket> userTicketList = ticketRepository.findByUserId(userId);
-        return userTicketList;
+        List<Ticket> userEnableTicketList = userTicketList.stream()
+                .filter(ticket -> ticket.getEnable().equals(true)).collect(Collectors.toList());
+        return userEnableTicketList;
     }
 
     public List<Ticket> findByUserIdAndExpeditionId(Integer userId, Integer expeditionId) {
@@ -64,7 +62,7 @@ public class TicketService {
         return converter.convert(ticket);
     }
 
-    @Cacheable(value = "totalTicketPriceCache", key = "#id")
+    //@Cacheable(value = "totalTicketPriceCache", key = "#id")
     public Double getTotalTicketPrice(Integer id) throws Exception {
         List<Ticket> findAllTicket = ticketRepository.findAll();
         List<Ticket> sameExpeditionTickets = findAllTicket.stream()
@@ -86,17 +84,10 @@ public class TicketService {
                         HttpStatus.NOT_FOUND,
                         ErrorCode.NOT_FOUND));
         updated.setEnable(true);
+        ticketRepository.save(updated);
         return updated;
     }
 
-
-    private void adequateTicketControl(Integer ticketNumber) {
-        if (ticketNumber < 1) {
-            throw new GeneralException(Message.NOT_ENOUGH_TICKET,
-                    HttpStatus.NOT_FOUND,
-                    ErrorCode.NOT_FOUND);
-        }
-    }
 
     public void delete(Integer id) {
         Ticket ticket = ticketRepository.findById(id)
