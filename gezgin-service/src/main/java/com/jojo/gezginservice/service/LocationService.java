@@ -21,11 +21,14 @@ public class LocationService {
 
     Logger logger = Logger.getLogger(LocationService.class.getName());
 
-    @Autowired
-    LocationRepository locationRepository;
+    private final LocationRepository locationRepository;
 
-    @Autowired
-    private LocationConverter converter;
+    private final LocationConverter converter;
+
+    public LocationService(LocationRepository locationRepository, LocationConverter converter) {
+        this.locationRepository = locationRepository;
+        this.converter = converter;
+    }
 
     public LocationResponse createLocation(LocationRequest locationRequest) throws Exception {
         isEmptyCityAndAddress(locationRequest.getCity(), locationRequest.getAddress());

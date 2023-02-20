@@ -18,8 +18,11 @@ public class VehicleController {
 
     Logger logger = Logger.getLogger(VehicleController.class.getName());
 
-    @Autowired
-    VehicleService vehicleService;
+    private final VehicleService vehicleService;
+
+    public VehicleController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
 
     @PostMapping
     public ResponseEntity<VehicleResponse> createVehicle(@RequestBody VehicleRequest vehicleRequest) throws Exception {

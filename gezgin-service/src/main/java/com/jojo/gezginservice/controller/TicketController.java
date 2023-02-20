@@ -18,8 +18,11 @@ public class TicketController {
 
     Logger logger = Logger.getLogger(TicketController.class.getName());
 
-    @Autowired
-    private TicketService ticketService;
+    private final TicketService ticketService;
+
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
 
     @GetMapping
     public ResponseEntity<List<TicketResponse>> getAll() {

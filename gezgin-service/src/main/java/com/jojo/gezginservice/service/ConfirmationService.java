@@ -36,20 +36,27 @@ public class ConfirmationService {
     private static final int CORPORATE_USERS_MAX_TICKET = 20;
     Logger logger = Logger.getLogger(ExpeditionService.class.getName());
 
-    @Autowired
-    private ConfirmationRepository confirmationRepository;
 
-    @Autowired
-    private TicketService ticketService;
+    private final ConfirmationRepository confirmationRepository;
 
-    @Autowired
-    private PaymentServiceClient paymentServiceClient;
+    private final TicketService ticketService;
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private final PaymentServiceClient paymentServiceClient;
 
-    @Autowired
-    private RabbitMQConfiguration rabbitMQConfiguration;
+    private final RabbitTemplate rabbitTemplate;
+
+    private final RabbitMQConfiguration rabbitMQConfiguration;
+
+
+    public ConfirmationService(ConfirmationRepository confirmationRepository, TicketService ticketService,
+                               PaymentServiceClient paymentServiceClient, RabbitTemplate rabbitTemplate,
+                               RabbitMQConfiguration rabbitMQConfiguration) {
+        this.confirmationRepository = confirmationRepository;
+        this.ticketService = ticketService;
+        this.paymentServiceClient = paymentServiceClient;
+        this.rabbitTemplate = rabbitTemplate;
+        this.rabbitMQConfiguration = rabbitMQConfiguration;
+    }
 
     public List<Confirmation> getAll() {
         List<Confirmation> confirmationList = confirmationRepository.findAll();

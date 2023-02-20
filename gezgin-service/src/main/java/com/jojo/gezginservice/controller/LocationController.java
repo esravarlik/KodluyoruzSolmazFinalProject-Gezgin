@@ -18,8 +18,11 @@ public class LocationController {
 
     Logger logger = Logger.getLogger(LocationController.class.getName());
 
-    @Autowired
-    LocationService locationService;
+    private final LocationService locationService;
+
+    public LocationController(LocationService locationService) {
+        this.locationService = locationService;
+    }
 
     @PostMapping
     public ResponseEntity<LocationResponse> createLocation(@RequestBody LocationRequest locationRequest) throws Exception {

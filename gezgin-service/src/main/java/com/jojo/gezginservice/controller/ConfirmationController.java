@@ -16,8 +16,12 @@ import java.util.logging.Logger;
 public class ConfirmationController {
 
     Logger logger = Logger.getLogger(VehicleController.class.getName());
-    @Autowired
-    private ConfirmationService confirmationService;
+
+    private final ConfirmationService confirmationService;
+
+    public ConfirmationController(ConfirmationService confirmationService) {
+        this.confirmationService = confirmationService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Confirmation>> getAll() {

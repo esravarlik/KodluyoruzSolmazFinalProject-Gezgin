@@ -1,13 +1,16 @@
 package com.jojo.gezginservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -26,8 +29,7 @@ public class Expedition extends BaseEntity {
     @Column(name = "company")
     private String company;
 
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private LocalDateTime departureDate;
+    private LocalDate departureDate;
 
     @ManyToOne
     @JoinColumn(name = "from_location_id")
@@ -63,11 +65,11 @@ public class Expedition extends BaseEntity {
         this.company = company;
     }
 
-    public LocalDateTime getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(LocalDateTime departureDate) {
+    public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 

@@ -26,17 +26,22 @@ import java.util.logging.Logger;
 public class UserService {
 
     Logger logger = Logger.getLogger(UserService.class.getName());
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
-    private UserConverter converter;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private final UserConverter converter;
 
-    @Autowired
-    private RabbitMQConfiguration rabbitMQConfiguration;
+    private final RabbitTemplate rabbitTemplate;
+
+    private final RabbitMQConfiguration rabbitMQConfiguration;
+
+    public UserService(UserRepository userRepository, UserConverter converter,
+                       RabbitTemplate rabbitTemplate, RabbitMQConfiguration rabbitMQConfiguration) {
+        this.userRepository = userRepository;
+        this.converter = converter;
+        this.rabbitTemplate = rabbitTemplate;
+        this.rabbitMQConfiguration = rabbitMQConfiguration;
+    }
 
     private static Supplier<GeneralException> notFoundUser(HttpStatus unauthorized) {
         throw new GeneralException(Message.USER_NOT_FOUND, HttpStatus.NOT_FOUND, ErrorCode.NOT_FOUND);

@@ -1,12 +1,15 @@
 package com.jojo.gezginservice.controller;
 
+import com.jojo.gezginservice.model.Expedition;
 import com.jojo.gezginservice.request.ExpeditionRequest;
 import com.jojo.gezginservice.response.ExpeditionResponse;
 import com.jojo.gezginservice.service.ExpeditionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,8 +21,12 @@ public class ExpeditionController {
 
     Logger logger = Logger.getLogger(ExpeditionController.class.getName());
 
-    @Autowired
-    private ExpeditionService expeditionService;
+
+    private final ExpeditionService expeditionService;
+
+    public ExpeditionController(ExpeditionService expeditionService) {
+        this.expeditionService = expeditionService;
+    }
 
     @GetMapping
     public ResponseEntity<List<ExpeditionResponse>> getAll() {
@@ -46,8 +53,8 @@ public class ExpeditionController {
     }
 
     @GetMapping(value = "/date/{date}")
-    public ResponseEntity<List<ExpeditionResponse>> getByExpeditionDate(@PathVariable("date")
-                                                                        LocalDateTime date) throws Exception {
+    public ResponseEntity<List<Expedition>> getByExpeditionDate(@PathVariable("date")
+                                                                        String date) throws Exception {
         return ResponseEntity.ok(expeditionService.getByExpeditionDate(date));
     }
 

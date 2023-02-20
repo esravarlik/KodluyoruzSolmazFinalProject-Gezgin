@@ -18,8 +18,12 @@ public class AuthController {
 
     Logger logger = Logger.getLogger(AuthController.class.getName());
 
-    @Autowired
-    private AuthService authService;
+
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserRequest registerRequest) throws Exception {

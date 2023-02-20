@@ -16,7 +16,6 @@ public class GezginServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(GezginServiceApplication.class, args);
 
-
     }
 
 }

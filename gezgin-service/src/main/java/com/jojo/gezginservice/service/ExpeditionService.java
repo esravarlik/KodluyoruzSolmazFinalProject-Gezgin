@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,11 +25,15 @@ public class ExpeditionService {
 
     Logger logger = Logger.getLogger(ExpeditionService.class.getName());
 
-    @Autowired
-    private ExpeditionRepository expeditionRepository;
+    private final ExpeditionRepository expeditionRepository;
 
-    @Autowired
-    private ExpeditionConverter converter;
+    private final ExpeditionConverter converter;
+
+    public ExpeditionService(ExpeditionRepository expeditionRepository,
+                             ExpeditionConverter converter) {
+        this.expeditionRepository = expeditionRepository;
+        this.converter = converter;
+    }
 
     public ExpeditionResponse create(ExpeditionRequest expeditionRequest) {
         Expedition savedExpedition = converter.convert(expeditionRequest);
@@ -89,11 +95,12 @@ public class ExpeditionService {
         return getVehicleType;
     }
 
-    public List<ExpeditionResponse> getByExpeditionDate(LocalDateTime date) {
-        List<ExpeditionResponse> expeditions = getAll();
-        expeditions.stream()
-                .filter(expeditionResponse -> expeditionResponse.getDepartureDate().equals(date));
-        return expeditions;
+    public List<Expedition> getByExpeditionDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate formatDate = LocalDate.parse(date, formatter);
+        return expeditionRepository.findAll().stream()
+                .filter(expedition -> expedition.getDepartureDate().equals(formatDate))
+                .collect(Collectors.toList());
     }
 
     public ExpeditionResponse update(Integer id, ExpeditionRequest expeditionRequest) throws Exception {

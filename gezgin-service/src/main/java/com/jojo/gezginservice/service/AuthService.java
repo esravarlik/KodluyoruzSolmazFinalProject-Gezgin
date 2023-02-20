@@ -23,18 +23,21 @@ import javax.transaction.Transactional;
 @Service
 public class AuthService {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private TokenService tokenService;
+    private final TokenService tokenService;
 
-    @Autowired
-    private PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
+    public AuthService(AuthenticationManager authenticationManager, UserService userService,
+                       TokenService tokenService, PasswordEncoder encoder) {
+        this.authenticationManager = authenticationManager;
+        this.userService = userService;
+        this.tokenService = tokenService;
+        this.encoder = encoder;
+    }
 
     public TokenResponse login(LoginRequest loginRequest) {
         try {

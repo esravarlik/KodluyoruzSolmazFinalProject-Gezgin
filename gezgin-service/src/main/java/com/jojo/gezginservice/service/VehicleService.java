@@ -21,10 +21,17 @@ import java.util.logging.Logger;
 public class VehicleService {
 
     Logger logger = Logger.getLogger(VehicleService.class.getName());
-    @Autowired
-    private VehicleRepository vehicleRepository;
-    @Autowired
-    private VehicleConverter converter;
+
+
+    private final VehicleRepository vehicleRepository;
+
+
+    private final VehicleConverter converter;
+
+    public VehicleService(VehicleRepository vehicleRepository, VehicleConverter converter) {
+        this.vehicleRepository = vehicleRepository;
+        this.converter = converter;
+    }
 
     public VehicleResponse create(VehicleRequest vehicleRequest) throws Exception {
         isEmptyVehicleTypeAndCapacity(vehicleRequest.getVehicleType(), vehicleRequest.getCapacity());

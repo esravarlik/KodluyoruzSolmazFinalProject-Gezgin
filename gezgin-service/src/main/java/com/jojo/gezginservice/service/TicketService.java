@@ -24,11 +24,14 @@ public class TicketService {
 
     Logger logger = Logger.getLogger(TicketService.class.getName());
 
-    @Autowired
-    private TicketRepository ticketRepository;
+    private final TicketRepository ticketRepository;
 
-    @Autowired
-    private TicketConverter converter;
+    private final TicketConverter converter;
+
+    public TicketService(TicketRepository ticketRepository, TicketConverter converter) {
+        this.ticketRepository = ticketRepository;
+        this.converter = converter;
+    }
 
     public TicketResponse createTicket(TicketRequest ticketRequest) throws Exception {
         Ticket ticket = converter.convert(ticketRequest);

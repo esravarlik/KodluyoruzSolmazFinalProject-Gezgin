@@ -22,11 +22,15 @@ public class PassengerInformationService {
 
     Logger logger = Logger.getLogger(PassengerInformationService.class.getName());
 
-    @Autowired
-    private PassengerInformationRepository passengerInformationRepository;
+    private final PassengerInformationRepository passengerInformationRepository;
 
-    @Autowired
-    private PassengerConverter converter;
+    private final PassengerConverter converter;
+
+    public PassengerInformationService(PassengerInformationRepository passengerInformationRepository,
+                                       PassengerConverter converter) {
+        this.passengerInformationRepository = passengerInformationRepository;
+        this.converter = converter;
+    }
 
     public PassengerResponse create(PassengerRequest passenger) throws Exception {
         isEmptyFirstNameAndLastName(passenger.getFirstName(), passenger.getLastName());

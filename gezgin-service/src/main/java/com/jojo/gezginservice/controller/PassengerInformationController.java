@@ -19,8 +19,11 @@ public class PassengerInformationController {
 
     Logger logger = Logger.getLogger(PassengerInformationController.class.getName());
 
-    @Autowired
-    PassengerInformationService passengerService;
+    private final PassengerInformationService passengerService;
+
+    public PassengerInformationController(PassengerInformationService passengerService) {
+        this.passengerService = passengerService;
+    }
 
     @PostMapping
     public ResponseEntity<PassengerResponse> create(@RequestBody PassengerRequest passengerRequest) throws Exception {
